@@ -19,7 +19,7 @@ Exhausted from the mental gymnastics of remembering DNS commands and playing hid
 Systems reject my password selection due to lack of complexity. Out of frustration this application will validate if my chpsen password meets the complexity criteria (according to me).Ever feel like your passwords are staging a rebellion against complexity standards? Enter this superhero application, swooping in to validate if your chosen password passes the "according to me" complexity criteria. Say goodbye to frustration and hello to password peace – because sometimes, it's good to be the superhero of your own security saga! 🦸‍♂️🔐
 - **password-complexity-check**
 
-
+---
 ### Requirements
 - Ready to dive into the world of Go? Go ahead and install Go (pun totally intended!). Go is the superhero programming language behind these source codes. You can either make them flex their muscles instantly with ```go run source_code.go``` (no need to compile) or give them a power boost with ```go build source_code.go``` to create a binary sidekick in your current working directory. Let the coding adventures begin!
 
