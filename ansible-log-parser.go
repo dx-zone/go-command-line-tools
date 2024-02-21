@@ -7,17 +7,23 @@ import (
 	"strings"
 )
 
+// ANSI escape codes for colors
+const (
+	Reset = "\033[0m"
+	Green = "\033[32m"
+)
+
 func main() {
 	if len(os.Args) != 2 {
-		fmt.Println("\nThis program reads the lines of any given ASCII/text file and split the lines per every '\\n' character found.\n")
+		fmt.Println("This program reads the lines of any given ASCII/text file and splits the lines per every '\\n' character found.")
 		fmt.Println("Usage: ansible-log-parser <filename>")
-		fmt.Println("Ex: ansible-log-parser my.txt\n")
+		fmt.Println("Ex: ansible-log-parser my.txt")
 	} else {
 		filePath := os.Args[1]
 
 		content, err := ioutil.ReadFile(filePath)
 		if err != nil {
-			fmt.Printf("Error reading file: %v\n", err)
+			fmt.Printf("%sError reading file: %v%s\n", Green, err, Reset)
 			os.Exit(1)
 		}
 
@@ -27,9 +33,9 @@ func main() {
 		lines := strings.Split(contentStr, "\n")
 
 		for i, line := range lines {
-			fmt.Printf("Line #%d: %s\n", i+1, line)
+			fmt.Printf("%sLine #%d:%s %s\n", Green, i+1, Reset, line)
 		}
 
-		fmt.Println("Done!")
+		fmt.Printf("%sDone!%s\n", Green, Reset)
 	}
 }
