@@ -16,7 +16,7 @@ Exhausted from the mental gymnastics of remembering DNS commands and playing hid
 - **dns-zone-helper.go**
 ---
 
-Systems reject my password selection due to lack of complexity. Out of frustration this application will validate if my chpsen password meets the complexity criteria (according to me).Ever feel like your passwords are staging a rebellion against complexity standards? Enter this superhero application, swooping in to validate if your chosen password passes the "according to me" complexity criteria. Say goodbye to frustration and hello to password peace – because sometimes, it's good to be the superhero of your own security saga! 🦸‍♂️🔐
+Ever feel like your passwords are staging a rebellion against complexity standards? Enter this superhero application, swooping in to validate if your chosen password passes the "according to me" complexity criteria. Say goodbye to frustration and hello to password peace – because sometimes, it's good to be the superhero of your own security saga! 🦸‍♂️🔐
 - **password-complexity-check**
 
 ---
