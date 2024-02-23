@@ -9,8 +9,44 @@ This is a delightful assembly of command-line wizardry crafted in the enchanting
 
 ## Tools
 ---
+## Go Highlighter
+- **highlight.go**
+
+The highlight program is your trusty sidekick in the world of text and ASCII files, adding a splash of color to your monochrome code or prose. Crafted with Go's finesse, this versatile syntax highlighter transforms dull files into vibrant masterpieces. Powered by the Chroma library, this highlighter performs its wizardry to bring syntax to life, making your code or text pop with vivid colors in the terminal window. Unleash the magic with the highlight program—where code meets comedy, and text transforms into a technicolor wonderland! ✨🎩
+
+
+The `highlight` program is a versatile syntax highlighter for text and ASCII files written in Go. It utilizes the Chroma library to apply syntax highlighting, making code or text more readable. The program supports multiple themes for highlighting, including:
+
+- 🎨 **monokai** (default)
+- 🌈 **github**
+- 🎨 **pygments**
+- 🖌️ **friendly**
+- 📝 **tango**
+
+## Usage
+
+To use the highlighter, run the following command:
+
+```bash
+highlight <filename>
+highlight <filename> [<theme-name>]
+```
+
+## Examples
+
+```bash
+highlight log.txt  # will highlight the content of the file with the Monokai theme when no theme is specified
+highlight code.py  # will highlight the content of the file with the Monokai theme when no theme is specified
+highlight errors.log github  # highlight using the github theme 
+highlight errors.log pygments  # highlight using the pygments theme
+highlight errors.log friendly  # highlight using the friendly theme
+highlight errors.log tango  # highlight using the tango theme
+```
+<!-- - TODO: Create a recorded GIF image showcasing the use of this app -->
+---
 ## Log Line Splitter
 - **log-line-splitter.go**
+
 Fed up with unraveling the mysteries of failed system logs? Simply toss those logs into a text file, and behold! This nifty tool will magically transform the chaos into a beautifully formatted masterpiece, making decoding errors a breeze. It's like turning "blah blah blah error\nwtf\nexception\nunknown" into a log ballet. 💃✨
 
 The main purpose of the provided Go code, named `log-line-splitter`, is to read the lines of any given ASCII/text file and split the lines based on a specified character or use the default newline character (`\n`). It provides a simple utility for parsing and formatting log files or text documents.
