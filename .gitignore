@@ -1,0 +1,95 @@
+# Ignore OS and editor-specific files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore compiled binaries and libraries
+*.o
+*.obj
+*.a
+*.pyc
+*.pyo
+*.dll
+*.exe
+
+# Ignore logs and databases
+*.log
+*.sql
+*.sqlite
+
+# Ignore dependencies
+/node_modules/
+/vendor/
+/.venv/
+/.env/
+
+# Ignore environment-specific files
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Ignore sensitive or personal files
+*.secret
+*.key
+*.pem
+
+# Ignore package files
+*.tar
+*.zip
+*.gz
+
+# Ignore compiled bytecode
+__pycache__/
+*.pyc
+
+# Ignore Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Ignore coverage reports, build output, and temporary files
+/coverage/
+/build/
+/tmp/
+
+# Ignore local configuration files
+/.env.local
+/.env.development.local
+/.env.test.local
+/.env.production.local
+
+# Ignore macOS metadata files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Ignore thumbnails created by Windows
+Thumbs.db
+ehthumbs.db
+
+# Ignore Visual Studio Code folders
+.vscode/
+
+# Ignore IntelliJ project files
+.idea/
+
+# Ignore npm debugging log
+npm-debug.log*
+
+# Ignore yarn integrity file
+.yarn-integrity
+
+# Ignore artifacts and binaries
+*.db
+*.log
+*.sqlite
+
+# Ignore secrets and credentials
+secrets.env
+secrets.yml
+secrets.json
+
+# Ignore directories
+development
