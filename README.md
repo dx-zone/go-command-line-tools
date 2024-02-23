@@ -110,8 +110,6 @@ The main purpose of the **password-complexity-check** is to determine whether a 
      - If the entered password does not meet the complexity criteria or is less than 8 characters, the program prints: "Password does not meet the complexity criteria or is less than 8 characters."
 This code is a simple password complexity checker, providing a basic level of security validation for user-generated passwords. It checks for a combination of factors to ensure that passwords are sufficiently strong and meet standard security guidelines.
 
-XXXXXXXXXXXXXXXX
-
 <!-- - TODO: Create a recorded GIF image showcasing the use of this app -->
 
 ---
