@@ -35,13 +35,13 @@ func main() {
 	if len(os.Args) < 2 || len(os.Args) > 3 {
 		fmt.Println("\nThis program reads the lines of any given ASCII/text file and it will splits the lines per every '\\n' character found (by default).")
 		fmt.Println("But you can also specifying by which character you want to split lines. For example, you can split by \"\\t\" or by any other character speficied as argument.\n")
-		fmt.Println("Usage:\nansible-log-parser <filename>")
-		fmt.Println("ansible-log-parser <filename> <character-to-split-line>\n")
-		fmt.Println("Ex: ansible-log-parser my.txt\n")
-		fmt.Println("Ex: ansible-log-parser my.txt a")
-		fmt.Println("Ex: ansible-log-parser my.txt c\n")
-		fmt.Println("Ex: ansible-log-parser my.txt \"\\n\"")
-		fmt.Println("Ex: ansible-log-parser my.txt \"\\t\"\n")
+		fmt.Println("Usage:\nlog-line-splitter <filename>")
+		fmt.Println("log-line-splitter <filename> <character-to-split-line>\n")
+		fmt.Println("Ex: log-line-splitter my.txt\n")
+		fmt.Println("Ex: log-line-splitter my.txt a")
+		fmt.Println("Ex: log-line-splitter my.txt c\n")
+		fmt.Println("Ex: log-line-splitter my.txt \"\\n\"")
+		fmt.Println("Ex: log-line-splitter my.txt \"\\t\"\n")
 	} else if len(os.Args) == 3 {
 		filename := os.Args[1]
 		char_split := os.Args[2]
