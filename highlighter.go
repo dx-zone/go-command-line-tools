@@ -1,7 +1,6 @@
 package main
 
 import (
-    "bufio"
     "flag"
     "fmt"
     "io/ioutil"
@@ -51,7 +50,7 @@ func highlight(filename, theme string, lineNumbers bool) {
         // Split content into lines and append line numbers
         lines := strings.Split(string(content), "\n")
         for i, line := range lines {
-            processedContent += fmt.Sprintf("Line #%d: %s\n", i+1, line)
+            processedContent += fmt.Sprintf("%d: %s\n", i+1, line)
         }
     } else {
         processedContent = string(content)
@@ -71,8 +70,9 @@ func printUsage() {
 	fmt.Println("The following additional themes can be specified for different highlighting styles:")
 	fmt.Println("\n🎨 pygments (default)\n🖍️  monokai\n🖌️  github\n🖋️  friendly\n📝 tango\n")
 	fmt.Println("Usage:")
-	fmt.Println("highlight <filename>")
-	fmt.Println("highlight <filename> <theme-name>")
+	fmt.Println("highlight <filename> \t\t\t\t# highlight syntax using the default theme (pygments)")
+    fmt.Println("highlight -l <filename> \t\t\t# append line numbers")
+	fmt.Println("highlight <filename> <theme-name> \t\t# specify the theme name for syntax highlight")
 	fmt.Println("")
 	fmt.Println("highlight <filename> -p")
 	fmt.Println("highlight <filename> --pygments")
