@@ -1,19 +1,25 @@
 package main
 
 import (
+    "bufio"
+    "flag"
     "fmt"
     "io/ioutil"
     "os"
+    "strings"
     "github.com/alecthomas/chroma/quick"
 )
 
-var themes = map[string]bool{
-    "friendly": true,
-    "github":   true,
-    "monokai":  true,
-    "pygments": true,
-    "tango":    true,
-}
+var (
+    themes = map[string]bool{
+        "friendly": true,
+        "github":   true,
+        "monokai":  true,
+        "pygments": true,
+        "tango":    true,
+    }
+    lineNumbers bool
+)
 
 func normalizeTheme(themeInput string) string {
     switch themeInput {
@@ -32,20 +38,27 @@ func normalizeTheme(themeInput string) string {
     }
 }
 
-func highlight(filename, theme string) {
-    // Normalize theme using the themes map to default to "pygments" if an invalid theme is provided
-    if _, ok := themes[theme]; !ok {
-        theme = "pygments"
-    }
-
+func highlight(filename, theme string, lineNumbers bool) {
+    // Read file content
     content, err := ioutil.ReadFile(filename)
     if err != nil {
         fmt.Printf("Error reading file: %v\n", err)
         os.Exit(1)
     }
 
+    var processedContent string
+    if lineNumbers {
+        // Split content into lines and append line numbers
+        lines := strings.Split(string(content), "\n")
+        for i, line := range lines {
+            processedContent += fmt.Sprintf("Line #%d: %s\n", i+1, line)
+        }
+    } else {
+        processedContent = string(content)
+    }
+
     // Display the content with syntax highlighting
-    err = quick.Highlight(os.Stdout, string(content), "go", "terminal", theme)
+    err = quick.Highlight(os.Stdout, processedContent, "go", "terminal", theme)
     if err != nil {
         fmt.Printf("Error highlighting content: %v\n", err)
         os.Exit(1)
@@ -98,16 +111,20 @@ func printUsage() {
 }
 
 func main() {
-    if len(os.Args) < 2 || len(os.Args) > 3 {
+    flag.BoolVar(&lineNumbers, "l", false, "Include line numbers")
+    flag.Parse()
+
+    args := flag.Args()
+    if len(args) < 1 || len(args) > 2 {
         printUsage()
         os.Exit(0)
     }
 
-    filename := os.Args[1]
+    filename := args[0]
     theme := "pygments" // Default theme
-    if len(os.Args) == 3 {
-        theme = normalizeTheme(os.Args[2])
+    if len(args) == 2 {
+        theme = normalizeTheme(args[1])
     }
 
-    highlight(filename, theme)
+    highlight(filename, theme, lineNumbers)
 }
