@@ -91,4 +91,27 @@ secrets.env
 secrets.yml
 secrets.json
 
-# Ignore directories
+# Ignore vagrant related dir/files
+.vagrant
+*~
+*#
+.#*
+\#*#
+.*.sw[a-z]
+*.un~
+
+# Ruby Bundler
+Gemfile.lock
+gems.locked
+bin/*
+.bundle/*
+
+# Ignore test kitchen
+.kitchen/
+kitchen.local.yml
+
+# Ignore Chef Infra
+Berksfile.lock
+.zero-knife.rb
+Policyfile.lock.json
+.idea/
