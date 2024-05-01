@@ -70,24 +70,44 @@ func printGrepCommand(zoneName, zoneView string) {
 
 func printBindCommands(zoneName, zoneView, filePath string) {
 	fmt.Println("# Best practice: Create a backup of the BIND configuration file and the specific zone file, storing it with a timestamp.")
+	
 	timestamp := time.Now().Format("20060102-150405")
+    
     fmt.Println("sudo tar -czvf /srv/dns-zone-" + zoneName + "-backup-" + timestamp + ".tar.gz /etc/named.conf /var/named/zones/" + zoneView + "/db." + zoneName + ".zone\n")
+	
 	fmt.Println("# Copy the BIND configuration and zone files to a temporary directory for safety.")
+	
 	fmt.Printf("sudo cp -a /etc/named.conf /var/named/zones/%s/db.%s.zone /tmp/\n\n", zoneView, zoneName)
-	fmt.Println("# Validate the main BIND configuration file. If no errors are output, the configuration is correct.")
-	fmt.Println("sudo named-checkconf /etc/named/primary/named.active.conf\n")
-	fmt.Println(`# Search for '` + zoneName + `' within the active zone configurations and display 4 lines after each match to provide context. This is useful for validating the zone type configuration and ensuring correct settings.`)
+	
+	fmt.Println("# Validate the that the main BIND configuration is free of errors.. If no errors are output, the configuration is correct.")
+	
+	fmt.Println("sudo named-checkconf /etc/named.conf\n")
+	
+	fmt.Println(`# Search for '` + zoneName + `' within the active zone configurations and validate the zone type configuration and ensuring correct settings.`)
+	
 	fmt.Printf("sudo grep -Hnr 'zone \"%s' /etc/named/primary/zones.active.*%s* -A4\n\n", zoneName, zoneView)
-    fmt.Println("\nNOTE: Proceed with the following commands if the zone type is master (slave zones can't be edited as the records will be overwritten by the master DNS for the zone).\n")
-	fmt.Printf("# List details for the specified zone file to confirm its existence and permissions.\nsudo ls -la %s\n\n", filePath)
-	fmt.Println("# Check the syntax and validate the that the main BIND configuration is free of errors. No output indicates no errors.\nsudo named-checkconf \\etc\\named.conf\n")
+	
+	fmt.Printf("# Confirm the existence of the zone file and the permissions.\nsudo ls -la %s\n\n", filePath)
+	
+    fmt.Println("# NOTE: Proceed with the following commands if the zone type is master (slave zones can't be edited as the records will be overwritten by the master DNS for the zone).\n")
+
+	fmt.Println("# Check the syntax and validate the that zone file is free of errors. If the serial number and the OK is returned, the zone is good to be reloaded.\nsudo named-checkzone " + zoneName + " /var/named/zones/" + zoneView + "/db." + zoneName + ".zone\n")
+	
 	fmt.Printf("# Freeze updates to the zone '%s' to safely edit the zone file.\nsudo rndc freeze %s IN %s\n\n", zoneName, zoneName, zoneView)
+	
 	fmt.Printf("# Open the zone file in the Vi editor for manual modifications. Save the changes by pressing ':wq' and then Enter.\nsudo vi %s\n\n", filePath)
+	
 	fmt.Printf("# Safely remove the journal file associated with the zone to reset DNS record state tracking.\nsudo rm -i %s.jnl\n\n", filePath)
+	
 	fmt.Printf("# Check syntax and validate that the edited zone file is free of errors, ensuring all records are correctly formatted.\nsudo named-checkzone %s %s\n\n", zoneName, filePath)
+	
 	fmt.Printf("# Thaw the zone to resume automatic processing of updates.\nsudo rndc thaw %s IN %s\n\n", zoneName, zoneView)
+	
 	fmt.Printf("# Deprecated command: 'unfreeze' is no longer used, replaced by 'thaw'.\nsudo rndc unfreeze %s IN %s\n\n", zoneName, zoneView)
-	fmt.Printf("Instruct BIND to reload its configuration and zone files without the need to completely restart the server service.\nsudo rndc reload %s IN %s %s\n\n",zoneName, zoneView, filePath)
-    fmt.Println("\nNOTE: Proceed with the following command if the zone type is slave.\n")
-	fmt.Printf("On a Slave BIND DNS - instructs the BIND DNS slave server to refresh the DNS zone within the view, updating its data from the master server\nsudo rndc refresh %s IN %s\n\n",zoneName, zoneView)
+	
+	fmt.Printf("# Instruct BIND to reload its configuration and zone files without the need to completely restart the server service.\nsudo rndc reload %s IN %s %s\n\n",zoneName, zoneView, filePath)
+    
+    fmt.Println("# NOTE: Proceed with the following command if the zone type is slave.\n")
+	
+	fmt.Printf("# Instructs the BIND DNS slave server to refresh the DNS zone within the view, updating its data from the master server\nsudo rndc refresh %s IN %s\n\n",zoneName, zoneView)
 }
